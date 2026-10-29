@@ -1,13 +1,13 @@
 pipeline {
     agent { label 'student-laptop' }
-    triggers {
-        pollSCM('H/1 * * * *')
-    }
     options {
         skipDefaultCheckout(true)
         disableConcurrentBuilds()
         timeout(time: 5, unit: 'MINUTES')
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '5'))
+    }
+    triggers {
+        pollSCM('* * * * *')
     }
     stages {
         stage('Checkout') {
